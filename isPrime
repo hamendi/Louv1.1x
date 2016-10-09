@@ -1,0 +1,21 @@
+local Prime in 
+    fun {Prime N}		
+        local Helper in
+            fun {Helper X}
+                if ((X * X) =< N) then
+                    if (N mod X) == 0 orelse (N mod (X + 2)) == 0 
+                    then false
+                    else {Helper (X + 1)}
+                    end
+                else true    
+                end
+            end
+            if N =< 1 then false
+            elseif N =< 3 then true
+            elseif N mod 2 == 0 orelse N mod 3 == 0 then false
+            else {Helper N}
+            end            
+        end
+    end    
+    {Browse {Prime 11}}
+end
