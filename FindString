@@ -1,0 +1,24 @@
+declare
+fun {FindString L1 L2}
+   local Aux in
+	  fun {Aux L1 L2}
+		 case L1 
+		 of H|T then 
+			case L2
+			of H2|T2 then (if H == H2 then {Aux T T2} else false end)
+			[] nil then false
+			end
+		 [] nil then true
+		 end
+	  end
+	  if {Aux L1 L2} then true
+	  else
+		 case L2
+		 of H|T then {Aux L1 T} orelse  {FindString L1 T}
+		 [] nil then false
+		 end
+	  end
+   end
+end
+{Browse {FindString [[1 2 3]] [3 4 [1 2 3]]}}
+{Browse {FindString [[d e f]] [a b c [d e f]]}}
