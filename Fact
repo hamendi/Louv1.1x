@@ -1,0 +1,16 @@
+declare
+fun {Fact N}
+   local Aux in
+	  fun {Aux N2 A}
+		 if N2 > N then nil
+		 else
+			local Fact = N2*A in
+			   Fact | {Aux N2+1 Fact}
+			end
+		 end
+	  end
+	  {Aux 1 1}
+   end
+end
+
+{Browse {Fact 5}}
