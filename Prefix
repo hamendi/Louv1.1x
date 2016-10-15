@@ -1,0 +1,13 @@
+local Prefix in 
+   fun {Prefix L1 L2}
+	  case L1
+	  of H|T then
+		 case L2
+		 of H2|T2 then if H == H2 then {Prefix T T2} else false end
+		 [] nil then false
+		 end
+	  [] nil then true
+	  end
+   end
+   {Browse {Prefix nil nil}}
+end
