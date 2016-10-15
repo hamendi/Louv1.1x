@@ -1,0 +1,12 @@
+declare
+fun {FlattenList L}
+   case L
+   of H|T then if {List.is H} then {Append {FlattenList H} {FlattenList T}} else H | {FlattenList T} end
+   [] nil then nil
+   end
+end
+
+{Browse {FlattenList [[1] [2] [3]]}}
+{Browse {FlattenList [a b c]}}
+{Browse {FlattenList [a b c [d e f]]}}
+{Browse {FlattenList [a [b c d] [e [f]] g h [i j] k [[[l]]]]}}
