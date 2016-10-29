@@ -1,0 +1,25 @@
+local Build D C in
+   fun {Build D C}
+	  case D
+	  of nil then 'bottom'
+	  [] D1|D2 then fun {$ E} if D1 == E
+							  then C.1
+							  else if D2 == nil orelse C.2 == nil
+								   then 'bottom'
+								   else {{Build D2 C.2} E}
+								   end
+							  end
+					end
+	  end
+   end
+   local F D C in
+	  D = [1 2 3]
+	  C = [~1 ~2 ~3]
+	  F = {Build D C}
+	  {Browse {F 1}} % Prints ~1
+	  {Browse {F 2}} % Prints ~2
+	  {Browse {F 3}} % Prints ~3
+	  {Browse {F 4}} % Prints bottom
+   end
+end
+
