@@ -1,0 +1,64 @@
+declare
+Tub = btree(5
+			left:btree(3
+					   left:btree(1
+								  left:leaf
+								  right:leaf)
+					   right:btree(2
+								   left:leaf
+								   right:leaf))
+			right:btree(10
+						left:btree(8
+								   left:leaf
+								   right:leaf)
+						right:btree(11
+									left:leaf
+									right:btree(14
+												left:leaf
+												right:btree(16
+															left:leaf
+															right:leaf)))))
+declare
+Tba = btree(5
+			left:btree(3
+					   left:btree(1
+								  left:leaf
+								  right:leaf)
+					   right:btree(2
+								   left:leaf
+								   right:leaf))
+			right:btree(10
+						left:btree(8
+								   left:leaf
+								   right:leaf)
+						right:btree(11
+									left:leaf
+									right:leaf)))
+										  
+declare
+fun {NumLeaves T}
+   case T
+   of leaf then 1
+   [] btree(R left:T1 right:T2) then {NumLeaves T1} + {NumLeaves T2}
+   end
+end
+
+declare
+fun {IsBalanced T}
+   case T of leaf then true
+   [] btree(R left:T1 right:T2) then
+      if {NumLeaves T1} - {NumLeaves T2} == 0
+		 orelse {NumLeaves T1} - {NumLeaves T2} == 1
+		 orelse {NumLeaves T1} - {NumLeaves T2} == ~1
+	  then {IsBalanced T1} andthen {IsBalanced T2}
+      else
+		 false
+      end
+   end
+end
+
+
+{Browse {NumLeaves Tba}}
+{Browse {IsBalanced Tba}}
+{Browse {NumLeaves Tub}}
+{Browse {IsBalanced Tub}}
