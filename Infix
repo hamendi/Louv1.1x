@@ -1,0 +1,6 @@
+fun {Infix Tree}
+   case Tree
+   of leaf then nil
+   [] btree(R left:T1 right:T2) then {Append {Append {Infix T1} R|nil} {Infix T2}}
+   end
+end
