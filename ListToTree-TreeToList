@@ -1,0 +1,40 @@
+declare
+fun {FromTreeToList T}
+   case T
+   of leaf then nil
+   [] btree(R left:T1 right:T2) then {Append {Append {FromTreeToList T1} R|nil} {FromTreeToList T2}}
+   end
+end
+
+declare
+fun {FromListToTree L}
+   local Aux Insert in
+      fun {Insert N T}
+		 case T
+		 of leaf then btree(N left:leaf right:leaf)
+		 [] btree(X left:T1 right:T2) andthen X == N then btree(X left:T1 right:T2)
+		 [] btree(X left:T1 right:T2) andthen X < N then btree(X left:T1 right:{Insert N T2})
+		 [] btree(X left:T1 right:T2) andthen X > N then btree(X left:{Insert N T1} right:T2)
+		 end
+      end
+      fun {Aux List Tree}
+		 case List of nil then Tree
+		 [] H|T then {Aux T {Insert H Tree}}
+		 end
+      end
+      {Aux L btree(L.1 left:leaf right:leaf)}
+   end
+end
+
+%[42 24 12]	
+
+{Browse {FromListToTree [42 24 12]}}
+declare
+Te = btree(
+		1:42
+		left:btree(
+				1:24
+				left:btree(1:12 left:leaf right: leaf)
+				right:leaf)
+		right:leaf)
+{Browse {FromTreeToList Te}}
