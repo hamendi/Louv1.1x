@@ -36,7 +36,7 @@ Tba = btree(5
 									right:leaf)))
 										  
 declare
-fun {NumLeaves T}
+fun {NumLeaves Tree}
    case T
    of leaf then 1
    [] btree(R left:T1 right:T2) then {NumLeaves T1} + {NumLeaves T2}
@@ -44,7 +44,7 @@ fun {NumLeaves T}
 end
 
 declare
-fun {IsBalanced T}
+fun {IsBalanced Tree}
    case T of leaf then true
    [] btree(R left:T1 right:T2) then
       if {NumLeaves T1} - {NumLeaves T2} == 0
